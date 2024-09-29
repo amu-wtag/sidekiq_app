@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      SendWelcomeEmailJob.perform_later(@user)
+      SendWelcomeEmailJob.perform_in(1.second, @user.id)
       redirect_to root_path, notice: 'User was successfully created.'
     else
       render :new
