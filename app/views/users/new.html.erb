@@ -1,0 +1,15 @@
+<h1>Sign Up</h1>
+
+<%= form_with model: @user, url: users_create_path, local: true do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+  <div>
+    <%= form.submit "Sign Up" %>
+  </div>
+<% end %>
