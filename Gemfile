@@ -62,4 +62,4 @@ group :test do
 end
 
 gem 'sidekiq'
-gem 'redis', '~> 4.0'
+gem 'redis', '~> 5.3'
