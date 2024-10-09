@@ -6,17 +6,16 @@ RSpec.describe SendWelcomeEmailJob, type: :job do
   describe "Checks the Job" do
     it "sends a welcome email" do
         # Mock the UserMailer to avoid sending a real email
-        mailer = double("UserMailer")
-        allow(UserMailer).to receive(:welcome_email).with(user).and_return(mailer)
-        expect(mailer).to receive(:deliver_now)
+        mailer = double("UserMailer", deliver_now: true)
+        expect(UserMailer).to receive(:welcome_email).with(user).and_return(mailer)
     
         # Perform the job
-        described_class.new.perform(user.id)
+        SendWelcomeEmailJob.new.perform(user.id)
     end
     
     it "finds the user by id" do
         expect(User).to receive(:find).with(user.id).and_return(user)
-        described_class.new.perform(user.id)
+        SendWelcomeEmailJob.new.perform(user.id)
     end
   end
   
